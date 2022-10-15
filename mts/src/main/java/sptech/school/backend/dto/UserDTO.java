@@ -8,7 +8,7 @@ import sptech.school.backend.dto.base.BaseDTO;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class UserDTO  extends BaseDTO {
+public class UserDTO extends BaseDTO {
 
     private String name;
 

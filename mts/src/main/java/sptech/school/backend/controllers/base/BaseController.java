@@ -8,10 +8,8 @@ import sptech.school.backend.dto.UserDTO;
 import sptech.school.backend.dto.base.BaseDTO;
 import sptech.school.backend.services.base.ICrudFacade;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @AllArgsConstructor
 public abstract class  BaseController<DTO extends BaseDTO> {
@@ -38,7 +36,9 @@ public abstract class  BaseController<DTO extends BaseDTO> {
 
     @PutMapping("/{id}")
     public ResponseEntity<DTO> update(@PathVariable Long id, @RequestBody DTO dto) {
-        facade.update(id, dto);
+        if (this.facade.getById(id)) {
+            facade.update(id, dto);
+        }
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 

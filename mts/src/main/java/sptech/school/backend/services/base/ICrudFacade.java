@@ -19,4 +19,6 @@ public interface ICrudFacade<DTO extends BaseDTO> {
     void delete(Long id);
 
     DTO update(Long id, DTO dto);
+
+    boolean getById(Long id);
 }

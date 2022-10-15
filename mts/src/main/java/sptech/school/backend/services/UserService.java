@@ -9,7 +9,6 @@ import sptech.school.backend.mapper.abstractions.ICrudMapper;
 import sptech.school.backend.services.abstractions.IUserFacade;
 import sptech.school.backend.services.base.CrudFacade;
 
-
 @Component
 public class UserService extends CrudFacade<UserDTO, UserEntity> implements IUserFacade{
 

@@ -51,4 +51,9 @@ public class CrudFacade<DTO extends BaseDTO, Entity extends BaseEntity> implemen
         dao.save(entity);
         return dto;
     }
+
+    @Override
+    public boolean getById(Long id) {
+        return this.dao.existsById(id);
+    }
 }
