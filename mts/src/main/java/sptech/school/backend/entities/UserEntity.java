@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import sptech.school.backend.entities.base.BaseEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
@@ -21,6 +22,7 @@ public class UserEntity extends BaseEntity {
 
     private String email;
 
+    @Column(name = "phone", unique = true)
     private String phone;
 
     private String password;

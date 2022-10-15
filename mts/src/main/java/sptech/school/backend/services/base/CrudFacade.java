@@ -1,7 +1,7 @@
 package sptech.school.backend.services.base;
 
 import lombok.AllArgsConstructor;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import sptech.school.backend.dto.base.BaseDTO;
 import sptech.school.backend.entities.base.BaseEntity;
@@ -15,7 +15,7 @@ import java.util.stream.StreamSupport;
 @AllArgsConstructor
 public class CrudFacade<DTO extends BaseDTO, Entity extends BaseEntity> implements ICrudFacade<DTO> {
 
-    protected final CrudRepository<Entity, Long> dao;
+    protected final JpaRepository<Entity, Long> dao;
     protected final ICrudMapper<DTO, Entity> mapper;
 
     @Override
@@ -47,6 +47,7 @@ public class CrudFacade<DTO extends BaseDTO, Entity extends BaseEntity> implemen
     @Override
     @Transactional
     public DTO update(Long id, DTO dto) {
+        dao.deleteById(id);
         Entity entity = mapper.toEntity(dto);
         dao.save(entity);
         return dto;

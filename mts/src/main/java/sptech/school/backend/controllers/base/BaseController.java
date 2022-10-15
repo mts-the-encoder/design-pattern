@@ -8,6 +8,7 @@ import sptech.school.backend.dto.UserDTO;
 import sptech.school.backend.dto.base.BaseDTO;
 import sptech.school.backend.services.base.ICrudFacade;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,17 +30,18 @@ public abstract class  BaseController<DTO extends BaseDTO> {
     }
 
     @PostMapping
-    public ResponseEntity<DTO> create(@RequestBody DTO dto) {
+    public ResponseEntity<DTO> create(@Valid @RequestBody DTO dto) {
         var res = facade.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DTO> update(@PathVariable Long id, @RequestBody DTO dto) {
+    public ResponseEntity<DTO> update(@PathVariable Long id, @Valid @RequestBody DTO dto) {
         if (this.facade.getById(id)) {
             facade.update(id, dto);
+            return ResponseEntity.status(HttpStatus.OK).body(dto);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @DeleteMapping("/{id}")
@@ -47,5 +49,4 @@ public abstract class  BaseController<DTO extends BaseDTO> {
          facade.delete(id);
          return ResponseEntity.status(HttpStatus.OK).build();
     }
-
 }
